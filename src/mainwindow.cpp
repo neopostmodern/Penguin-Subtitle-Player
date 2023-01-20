@@ -409,10 +409,7 @@ void MainWindow::loadPref() {
                           .value("appearance/bgColor",
                                  QVariant::fromValue(PrefConstants::BG_COLOR))
                           .toUInt());
-  int bgAlpha = settings
-                    .value("appearance/bgAlpha",
-                           QVariant::fromValue(PrefConstants::BG_ALPHA))
-                    .toInt();
+  int bgAlpha = 0;
 
   QString bgColorStr =
       QString("background-color:rgba(%1,%2,%3,%4)")
@@ -487,7 +484,8 @@ void MainWindow::load(QString path) {
     delete engine;
     engine = new Engine(path, encoding);
     setup();
-    setPlay(true);
+    ui->topWidgets->hide();
+    ui->bottomWidgets->hide();
   } catch (const std::exception &e) {
     QMessageBox::critical(NULL, "Error loading subtitle", e.what(),
                           QMessageBox::Ok, QMessageBox::Ok);
