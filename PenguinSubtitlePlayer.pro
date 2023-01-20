@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui x11extras
+LIBS     += -lX11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -104,7 +105,8 @@ SOURCES += \
     src/parsers/webvttparser.cpp \
     src/parser.cpp \
     src/engine.cpp \
-    src/nccdialog.cpp
+    src/nccdialog.cpp \
+    src/eventfilter.cpp
 
 HEADERS += \
     src/configdialog.h \
@@ -120,7 +122,8 @@ HEADERS += \
     src/parserinterface.h \
     src/parser.h \
     src/engine.h \
-    src/nccdialog.h
+    src/nccdialog.h \
+    src/eventfilter.h
 
 FORMS    += \
     resource/ui/mainwindow.ui

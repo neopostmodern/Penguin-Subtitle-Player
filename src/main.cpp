@@ -2,6 +2,7 @@
 #include "QObject"
 #include "QPushButton"
 #include "mainwindow.h"
+#include "eventfilter.h"
 #include <QApplication>
 
 int main(int argc, char *argv[]) {
@@ -29,6 +30,11 @@ int main(int argc, char *argv[]) {
     w.load(path);
   }
   w.show();
+
+  EventFilter filter;
+  a.installNativeEventFilter(&filter);
+  filter.setup(&w);
+
   a.setQuitOnLastWindowClosed(false);
   return a.exec();
 }
