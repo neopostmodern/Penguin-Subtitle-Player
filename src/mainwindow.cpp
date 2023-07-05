@@ -346,6 +346,10 @@ void MainWindow::dropEvent(QDropEvent *e) {
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event) {
+  if (event->button() == Qt::RightButton) {
+    ui->topWidgets->show();
+    ui->bottomWidgets->show();
+  }
   if (ui->topSpacer->underMouse()) {
     ui->topSpacer->setCursor(Qt::ClosedHandCursor);
     m_nMouseClick_X_Coordinate = event->x();
@@ -365,8 +369,9 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event) {
 }
 
 void MainWindow::enterEvent(QEvent *event) {
-  ui->topWidgets->show();
-  ui->bottomWidgets->show();
+  // uncomment these lines to be able to change anything
+  // ui->topWidgets->show();
+  // ui->bottomWidgets->show();
 }
 
 void MainWindow::leaveEvent(QEvent *event) {
@@ -487,7 +492,7 @@ void MainWindow::load(QString path) {
     delete engine;
     engine = new Engine(path, encoding);
     setup();
-    setPlay(true);
+    activateNextClickCounts();
   } catch (const std::exception &e) {
     QMessageBox::critical(NULL, "Error loading subtitle", e.what(),
                           QMessageBox::Ok, QMessageBox::Ok);
